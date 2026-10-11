@@ -45,8 +45,8 @@ class Command(command.CommandBase):
         )
         parser.add_argument(
             "--cluster",
-            nargs='+',
-            default=[],
-            help="Write the id of chosen cluster, e.g. --cluster 0 3 2"
+            type=int,
+            default=0,
+            help="Write the id of chosen cluster, default as 0, -1 for all cluster(s)"
         )
 
