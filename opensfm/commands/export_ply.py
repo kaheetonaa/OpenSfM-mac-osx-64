@@ -18,6 +18,7 @@ class Command(command.CommandBase):
             args.no_points,
             args.depthmaps,
             args.point_num_views,
+            args.cluster,
         )
 
     def add_arguments_impl(self, parser: argparse.ArgumentParser) -> None:
@@ -42,3 +43,10 @@ class Command(command.CommandBase):
             default=False,
             help="Export the number of observations associated with each point",
         )
+        parser.add_argument(
+            "--cluster",
+            nargs='+',
+            default=[],
+            help="Write the id of chosen cluster, e.g. --cluster 0 3 2"
+        )
+

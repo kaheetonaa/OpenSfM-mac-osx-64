@@ -13,6 +13,7 @@ def run_dataset(
     no_points: bool,
     depthmaps: bool,
     point_num_views: bool,
+    cluster_list: list,
 ) -> None:
     """Export reconstruction to PLY format
 
@@ -29,16 +30,19 @@ def run_dataset(
     no_cameras = no_cameras
     no_points = no_points
     point_num_views = point_num_views
-
+    cluster_list=cluster_list
     if reconstructions:
-        data.save_ply(
-            reconstructions[0],
-            tracks_manager,
-            None,
-            no_cameras,
-            no_points,
-            point_num_views,
-        )
+        if len(cluster_list)==0:
+           cluster_list=range(len(reconstructions))
+        for _cluster_id in cluster_list:
+            data.save_ply(
+                reconstructions[int(_cluster_id)],
+                tracks_manager,
+                "reconstruction_cluster_"+str(_cluster_id)+".ply",
+                no_cameras,
+                no_points,
+                point_num_views,
+            )
 
     if depthmaps:
         udata = data.undistorted_dataset()
